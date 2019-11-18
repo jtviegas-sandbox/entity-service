@@ -1,6 +1,6 @@
 {
   "name": "@jtviegas/entity-service",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a generic crud service for entities",
   "main": "index.js",
   "scripts": {

@@ -24,10 +24,10 @@ const entityService = {
             if( event.httpMethod !== 'GET' )
                 throw new ServerError(`Unsupported method "${event.httpMethod}"`, 400);
             else {
-                if( event.pathParameters && event.pathParameters.app && event.pathParameters.entity && event.pathParameters.env ) {
+                if( event.pathParameters && event.pathParameters.app && event.pathParameters.entity && event.requestContext && event.requestContext.stage ) {
                     let app = event.pathParameters.app;
                     let entity = event.pathParameters.entity;
-                    let env = event.pathParameters.env;
+                    let env = event.requestContext.stage;
 
                     if( event.pathParameters.id )
                         store.entityRetrieval(app, env, entity, parseInt(event.pathParameters.id), done);

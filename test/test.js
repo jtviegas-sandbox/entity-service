@@ -64,7 +64,9 @@ describe('index tests', function() {
                 , pathParameters: {
                     entity: ENTITY
                     , app: APP
-                    , env: ENV
+                }
+                , requestContext: {
+                    stage: ENV
                 }
             };
             index.handler(event, context, (e,d)=>{
@@ -89,8 +91,10 @@ describe('index tests', function() {
                 , pathParameters: {
                     entity: ENTITY
                     , app: APP
-                    , env: ENV
                     , id: 2
+                }
+                , requestContext: {
+                    stage: ENV
                 }
             };
             index.handler(event, context, (e,d)=>{

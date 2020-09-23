@@ -31,8 +31,26 @@ const entityService = {
 
                     if( event.pathParameters.id )
                         store.entityRetrieval(app, env, entity, parseInt(event.pathParameters.id), done);
-                    else
-                        store.entitiesRetrieval(app, env, entity, done);
+                    else {
+                        let params = {
+                            id: 0
+                            , pageSize: commons.defaultPageSize
+                        };
+
+                        if( event.queryStringParameters ){
+                            try {
+                                if (event.queryStringParameters.id)
+                                    params.id = parseInt(event.queryStringParameters.id);
+                                if (event.queryStringParameters.pageSize)
+                                    params.pageSize = parseInt(event.queryStringParameters.pageSize);
+                            } catch (e) {
+                                logger.error("[entityService|handler] %o", e);
+                            }
+                        }
+
+                        store.entitiesRetrieval(app, env, entity, params, done);
+                    }
+
                 }
                 else
                     throw new ServerError("Unsupported path", 404);
